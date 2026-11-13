@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: clinic-agent-2
+    runtime: docker
+    plan: starter
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: OPENAI_API_KEY
+        sync: false
+    disk:
+      name: clinic-agent-data
+      mountPath: /app/data
+      sizeGB: 1
