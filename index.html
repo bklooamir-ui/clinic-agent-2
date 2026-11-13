@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101827"><title>Clinic Agent 2 | سامانه هوشمند کلینیک</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div id="loginView" class="login-shell">
+ <div class="login-card">
+  <div class="brand-mark">✚</div><div class="eyebrow">CLINIC AGENT · VERSION 2.0</div>
+  <h1>سلامت، هوشمندتر.</h1><p class="muted">به فضای امن مدیریت و خدمات کلینیک خوش آمدید.</p>
+  <form id="loginForm">
+   <label>ایمیل</label><input id="email" type="email" autocomplete="username" placeholder="name@example.com" required>
+   <label>رمز عبور</label><input id="password" type="password" autocomplete="current-password" placeholder="رمز عبور" required>
+   <button class="primary full" type="submit">ورود به سامانه <span>←</span></button>
+  </form>
+  <div id="loginError" class="error"></div>
+  <div class="demo-box"><b>حساب‌های نمایشی</b><br>مدیر: admin@clinic.local / Admin123!<br>پزشک: doctor@clinic.local / Doctor123!<br>بیمار: patient@clinic.local / Patient123!</div>
+  <small>نسخه شروع و آزمایشی · از اطلاعات واقعی بیماران استفاده نکنید.</small>
+ </div>
+</div>
+<div id="appView" class="app hidden">
+ <aside class="sidebar">
+  <div class="brand"><div class="brand-mark small">✚</div><div><b>Clinic Agent</b><small>SMART CARE PLATFORM</small></div></div>
+  <div class="profile"><div class="avatar" id="avatar">CA</div><div><b id="sideName">کاربر</b><small id="sideRole">نقش کاربر</small></div></div>
+  <nav id="nav">
+   <button class="nav-item active" data-page="overview">▦ <span>نمای کلی</span></button>
+   <button class="nav-item" data-page="appointments">▣ <span>نوبت‌ها</span></button>
+   <button class="nav-item" data-page="assistant">✧ <span>دستیار هوشمند پزشکی</span><i class="new-dot"></i></button>
+   <button class="nav-item" data-page="patients" data-roles="admin,doctor">♙ <span>بیماران</span></button>
+   <button class="nav-item" data-page="users" data-roles="admin">⚙ <span>مدیریت کاربران</span></button>
+  </nav>
+  <div class="sidebar-bottom"><div class="secure-note">◈ <span>محیط آزمایشی امن‌تر</span></div><button id="logoutBtn" class="logout">↪ خروج از حساب</button></div>
+ </aside>
+ <main class="main">
+  <header class="topbar"><div><div class="eyebrow">CLINIC MANAGEMENT</div><h2 id="pageTitle">نمای کلی</h2></div><div class="top-actions"><span class="today" id="today"></span><div class="avatar mini" id="topAvatar">CA</div></div></header>
+  <section id="page-overview" class="page">
+   <div class="welcome"><div><div class="eyebrow light">داشبورد هوشمند کلینیک</div><h1>روز بخیر، <span id="welcomeName">دوست عزیز</span></h1><p>وضعیت امروز کلینیک را از اینجا مدیریت کنید.</p></div><div class="welcome-icon">✚</div></div>
+   <div class="stats" id="stats"></div>
+   <div class="section-head"><div><h3>آخرین نوبت‌ها</h3><p>پیگیری وضعیت مراجعه‌ها</p></div><button class="outline" data-go="appointments">مشاهده همه ←</button></div>
+   <div class="panel table-wrap"><table><thead><tr><th>بیمار</th><th>پزشک</th><th>تاریخ</th><th>ساعت</th><th>وضعیت</th></tr></thead><tbody id="recentRows"></tbody></table></div>
+   <div class="tip"><b>✧ دستیار هوشمند پزشکی</b><span>برای دریافت اطلاعات عمومی پزشکی و راهنمایی اولیه وارد دستیار شوید. پاسخ‌ها جایگزین نظر پزشک نیستند.</span><button class="text-btn" data-go="assistant">شروع گفتگو ←</button></div>
+  </section>
+  <section id="page-appointments" class="page hidden">
+   <div class="section-head"><div><h3>مدیریت نوبت‌ها</h3><p>ثبت و پیگیری زمان مراجعه</p></div><button id="newAppointmentBtn" class="primary">＋ ثبت نوبت جدید</button></div>
+   <div class="panel table-wrap"><table><thead><tr><th>بیمار</th><th>پزشک</th><th>تاریخ</th><th>ساعت</th><th>علت مراجعه</th><th>وضعیت / عملیات</th></tr></thead><tbody id="appointmentRows"></tbody></table></div>
+  </section>
+  <section id="page-assistant" class="page hidden">
+   <div class="assistant-intro"><div class="ai-orb">✧</div><div><div class="eyebrow">MEDICAL AI ASSISTANT</div><h3>دستیار اطلاعات پزشکی</h3><p>پرسش‌های عمومی سلامت را به زبان ساده مطرح کنید.</p></div><span class="status-pill">● آماده پاسخ‌گویی</span></div>
+   <div class="notice">این دستیار برای آموزش عمومی است، نه تشخیص یا تجویز. در وضعیت اورژانسی منتظر پاسخ آنلاین نمانید و با اورژانس تماس بگیرید.</div>
+   <div class="chat-panel"><div id="chatMessages" class="messages"><div class="assistant-msg"><b>دستیار پزشکی</b><p>سلام! درباره علائم، بیماری‌ها، آزمایش‌ها یا اطلاعات عمومی داروها چه سؤالی دارید؟ لطفاً اطلاعات هویتی یا محرمانه وارد نکنید.</p></div></div>
+    <form id="chatForm" class="chat-form"><textarea id="chatInput" rows="2" maxlength="3000" placeholder="سؤال پزشکی خود را اینجا بنویسید..." required></textarea><button class="primary" type="submit">ارسال ↑</button></form>
+   </div>
+   <div class="sources"><b>منابع پیشنهادی برای مطالعه</b><a href="https://www.who.int/" target="_blank" rel="noreferrer">سازمان جهانی بهداشت (WHO)</a><a href="https://www.nhs.uk/" target="_blank" rel="noreferrer">NHS</a><a href="https://medlineplus.gov/" target="_blank" rel="noreferrer">MedlinePlus</a></div>
+  </section>
+  <section id="page-patients" class="page hidden"><div class="section-head"><div><h3>فهرست بیماران</h3><p>اطلاعات پایه حساب‌های بیمار</p></div></div><div class="panel table-wrap"><table><thead><tr><th>نام بیمار</th><th>ایمیل</th><th>تاریخ عضویت</th></tr></thead><tbody id="patientRows"></tbody></table></div></section>
+  <section id="page-users" class="page hidden"><div class="section-head"><div><h3>مدیریت کاربران</h3><p>ایجاد حساب برای بیمار، پزشک یا مدیر</p></div><button id="addUserBtn" class="primary">＋ کاربر جدید</button></div><div class="panel table-wrap"><table><thead><tr><th>نام</th><th>ایمیل</th><th>نقش</th><th>تخصص</th></tr></thead><tbody id="userRows"></tbody></table></div></section>
+  <footer>Clinic Agent 2.0 <span>نسخه آغازین · نیازمند بازبینی امنیتی پیش از استفاده واقعی</span></footer>
+ </main>
+</div>
+<div id="modal" class="modal hidden"><div class="modal-card"><button class="close" id="closeModal">×</button><div id="modalContent"></div></div></div>
+<div id="toast" class="toast"></div>
+<script src="/app.js"></script>
+</body></html>
